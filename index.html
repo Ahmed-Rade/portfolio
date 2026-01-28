@@ -1,59 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional portfolio of Ahmed Rade - Computer Engineer specializing in front-end development, IT Support, and scalable solutions.">
+    <meta name="description"
+        content="Professional portfolio of Ahmed Rade - Computer Engineer specializing in front-end development, IT Support, and scalable solutions.">
     <meta name="keywords" content="computer engineer, front-end developer, portfolio, web development, IT Support">
     <meta name="author" content="Ahmed Rade">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Ahmed Rade - Computer Engineer Portfolio">
-    <meta property="og:description" content="Experienced computer engineer tech-savvy, IT Support, and front-end developer.">
+    <meta property="og:description"
+        content="Experienced computer engineer tech-savvy, IT Support, and front-end developer.">
     <meta property="og:type" content="website">
-    
+
     <title>Ahmed Rade - Computer Engineer Portfolio</title>
-    
+
     <!-- Google Fonts - Added Cairo for Arabic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&family=Cairo:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Icons -->
-     <link rel="icon" type="image/png" href="favicon-light.png" media="(prefers-color-scheme: light)">
-     <link rel="icon" type="image/png" href="favicon-dark.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" href="favicon-light.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" href="favicon-dark.png" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="nav" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <a href="#home" class="logo" aria-label="Home">AR</a>
-            
-            <!-- Toggle Switches -->
-            <div class="toggle-switches">
-                <!-- Dark Mode Toggle -->
-                <button class="toggle-btn" id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle Dark Mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                
-                <!-- Language Toggle -->
-                <button class="toggle-btn lang-toggle" id="languageToggle" aria-label="Toggle language" title="Switch Language">
-                    <span class="lang-text">AR</span>
-                </button>
-            </div>
-            
-            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
+
             <ul class="nav-menu" role="list">
                 <li><a href="#about" data-en="About" data-ar="نبذة">About</a></li>
                 <li><a href="#skills" data-en="Skills" data-ar="المهارات">Skills</a></li>
@@ -61,6 +48,26 @@
                 <li><a href="#resume" data-en="Resume" data-ar="السيرة الذاتية">Resume</a></li>
                 <li><a href="#contact" data-en="Contact" data-ar="تواصل">Contact</a></li>
             </ul>
+
+            <!-- Toggle Switches -->
+            <div class="toggle-switches">
+                <!-- Dark Mode Toggle -->
+                <button class="toggle-btn" id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <!-- Language Toggle -->
+                <button class="toggle-btn lang-toggle" id="languageToggle" aria-label="Toggle language"
+                    title="Switch Language">
+                    <span class="lang-text">AR</span>
+                </button>
+            </div>
+
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -70,17 +77,22 @@
             <div class="hero-text">
                 <h1 class="hero-title">
                     <span class="hero-greeting" data-en="Hello, I'm" data-ar="مرحباً، أنا">Hello, I'm</span>
-                    <span class="hero-name" data-en="Ahmed Rade" data-ar="أحمد راضي" style="font-family: 'Amiri', serif;">Ahmed Rade</span>
+                    <span class="hero-name" data-en="Ahmed Rade" data-ar="أحمد راضي"
+                        style="font-family: 'Amiri', serif;">Ahmed Rade</span>
 
                 </h1>
                 <p class="hero-subtitle" data-en="Computer Engineer" data-ar="مهندس حاسوب">Computer Engineer</p>
-                <p class="hero-tagline" data-en="Empowering businesses through IT support, programming and development" data-ar="تمكين الأعمال من خلال الدعم التقني، البرمجة و التطوير">Empowering businesses through IT support, programming and development</p>
+                <p class="hero-tagline" data-en="Empowering businesses through IT support, programming and development"
+                    data-ar="تمكين الأعمال من خلال الدعم التقني، البرمجة و التطوير">Empowering businesses through IT
+                    support, programming and development</p>
                 <div class="hero-cta">
                     <a href="#resume" class="btn btn-primary" aria-label="Download resume">
-                        <i class="fas fa-download" aria-hidden="true"></i> <span data-en="Download Resume" data-ar="تحميل السيرة الذاتية">Download Resume</span>
+                        <i class="fas fa-download" aria-hidden="true"></i> <span data-en="Download Resume"
+                            data-ar="تحميل السيرة الذاتية">Download Resume</span>
                     </a>
                     <a href="#contact" class="btn btn-secondary" aria-label="Contact me">
-                        <i class="fas fa-envelope" aria-hidden="true"></i> <span data-en="Contact Me" data-ar="تواصل معي">Contact Me</span>
+                        <i class="fas fa-envelope" aria-hidden="true"></i> <span data-en="Contact Me"
+                            data-ar="تواصل معي">Contact Me</span>
                     </a>
                 </div>
             </div>
@@ -96,26 +108,33 @@
     <section id="about" class="about section">
         <div class="container">
             <h2 class="section-title" data-en="About Me" data-ar="نبذة عني">About Me</h2>
-           <div class="about-content">
+            <div class="about-content">
                 <div class="about-text">
                     <p class="about-intro"
-                    data-en="I'm a motivated and tech-savvy IT Service Desk Analyst with 2 years of hands-on experience supporting users and resolving IT-related issues in fast-paced environments. With a Bachelor's degree in Computer Engineering, I bring a strong foundation in IT fundamentals, programming, networking, and web technologies."
-                    data-ar="أنا محلل دعم فني لتقنية المعلومات يتمتع بالحافز والخبرة، مع سنتين من الخبرة العملية في دعم المستخدمين وحل المشكلات التقنية في بيئات عمل سريعة الوتيرة. أحمل درجة البكالوريوس في هندسة الحاسوب، مع أساس قوي في أساسيات تقنية المعلومات والبرمجة والشبكات وتقنيات الويب.">
-                        I'm a motivated and tech-savvy IT Service Desk Analyst with 2 years of hands-on experience supporting users and resolving IT-related issues in fast-paced environments. With a Bachelor's degree in Computer Engineering, I bring a strong foundation in IT fundamentals, programming, networking, and web technologies.
+                        data-en="I'm a motivated and tech-savvy IT Service Desk Analyst with 2 years of hands-on experience supporting users and resolving IT-related issues in fast-paced environments. With a Bachelor's degree in Computer Engineering, I bring a strong foundation in IT fundamentals, programming, networking, and web technologies."
+                        data-ar="أنا محلل دعم فني لتقنية المعلومات يتمتع بالحافز والخبرة، مع سنتين من الخبرة العملية في دعم المستخدمين وحل المشكلات التقنية في بيئات عمل سريعة الوتيرة. أحمل درجة البكالوريوس في هندسة الحاسوب، مع أساس قوي في أساسيات تقنية المعلومات والبرمجة والشبكات وتقنيات الويب.">
+                        I'm a motivated and tech-savvy IT Service Desk Analyst with 2 years of hands-on experience
+                        supporting users and resolving IT-related issues in fast-paced environments. With a Bachelor's
+                        degree in Computer Engineering, I bring a strong foundation in IT fundamentals, programming,
+                        networking, and web technologies.
                     </p>
-                    
-                    <p
-                    data-en="I work confidently with Windows and Linux systems, focusing on troubleshooting, incident resolution, and maintaining reliable IT services. I thrive in collaborative environments, communicate clearly with users and teams, and value proper documentation and structured workflows."
-                    data-ar="أعمل بثقة على أنظمة Windows وLinux، مع التركيز على استكشاف الأخطاء وإصلاحها، وحل الحوادث، والحفاظ على استقرار خدمات تقنية المعلومات. أزدهر في البيئات التعاونية، وأجيد التواصل الواضح مع المستخدمين والفرق، وأؤمن بأهمية التوثيق الجيد وسير العمل المنظم.">
-                        I work confidently with Windows and Linux systems, focusing on troubleshooting, incident resolution, and maintaining reliable IT services. I thrive in collaborative environments, communicate clearly with users and teams, and value proper documentation and structured workflows.
+
+                    <p data-en="I work confidently with Windows and Linux systems, focusing on troubleshooting, incident resolution, and maintaining reliable IT services. I thrive in collaborative environments, communicate clearly with users and teams, and value proper documentation and structured workflows."
+                        data-ar="أعمل بثقة على أنظمة Windows وLinux، مع التركيز على استكشاف الأخطاء وإصلاحها، وحل الحوادث، والحفاظ على استقرار خدمات تقنية المعلومات. أزدهر في البيئات التعاونية، وأجيد التواصل الواضح مع المستخدمين والفرق، وأؤمن بأهمية التوثيق الجيد وسير العمل المنظم.">
+                        I work confidently with Windows and Linux systems, focusing on troubleshooting, incident
+                        resolution, and maintaining reliable IT services. I thrive in collaborative environments,
+                        communicate clearly with users and teams, and value proper documentation and structured
+                        workflows.
                     </p>
-                    
-                    <p
-                    data-en="I’m a fast learner with a strong commitment to continuous improvement, currently expanding my skills in CCNA, CompTIA, ITIL, and Microsoft 365 Administration. My approach combines practical problem-solving with reliability, allowing me to work independently, stay effective under pressure, and deliver dependable IT support."
-                    data-ar="أنا سريع التعلم ولدي التزام قوي بالتطوير المستمر، وأعمل حالياً على تنمية مهاراتي في CCNA وCompTIA وITIL وإدارة Microsoft 365. يجمع نهجي بين حل المشكلات العملية والاعتمادية، مما يمكنني من العمل باستقلالية، والحفاظ على الكفاءة تحت الضغط، وتقديم دعم تقني موثوق.">
-                        I’m a fast learner with a strong commitment to continuous improvement, currently expanding my skills in CCNA, CompTIA, ITIL, and Microsoft 365 Administration. My approach combines practical problem-solving with reliability, allowing me to work independently, stay effective under pressure, and deliver dependable IT support.
+
+                    <p data-en="I’m a fast learner with a strong commitment to continuous improvement, currently expanding my skills in CCNA, CompTIA, ITIL, and Microsoft 365 Administration. My approach combines practical problem-solving with reliability, allowing me to work independently, stay effective under pressure, and deliver dependable IT support."
+                        data-ar="أنا سريع التعلم ولدي التزام قوي بالتطوير المستمر، وأعمل حالياً على تنمية مهاراتي في CCNA وCompTIA وITIL وإدارة Microsoft 365. يجمع نهجي بين حل المشكلات العملية والاعتمادية، مما يمكنني من العمل باستقلالية، والحفاظ على الكفاءة تحت الضغط، وتقديم دعم تقني موثوق.">
+                        I’m a fast learner with a strong commitment to continuous improvement, currently expanding my
+                        skills in CCNA, CompTIA, ITIL, and Microsoft 365 Administration. My approach combines practical
+                        problem-solving with reliability, allowing me to work independently, stay effective under
+                        pressure, and deliver dependable IT support.
                     </p>
-                    
+
                     <div class="about-highlights">
                         <div class="highlight-item">
                             <i class="fas fa-code" aria-hidden="true"></i>
@@ -123,10 +142,10 @@
                                 <h3 data-en="IT & Technical Foundations" data-ar="أساسيات تقنية المعلومات">
                                     IT & Technical Foundations
                                 </h3>
-                                <p
-                                data-en="Strong understanding of IT systems, operating systems, networking fundamentals, and programming concepts"
-                                data-ar="فهم قوي لأنظمة تقنية المعلومات، وأنظمة التشغيل، وأساسيات الشبكات، ومفاهيم البرمجة">
-                                    Strong understanding of IT systems, operating systems, networking fundamentals, and programming concepts
+                                <p data-en="Strong understanding of IT systems, operating systems, networking fundamentals, and programming concepts"
+                                    data-ar="فهم قوي لأنظمة تقنية المعلومات، وأنظمة التشغيل، وأساسيات الشبكات، ومفاهيم البرمجة">
+                                    Strong understanding of IT systems, operating systems, networking fundamentals, and
+                                    programming concepts
                                 </p>
                             </div>
                         </div>
@@ -136,9 +155,8 @@
                                 <h3 data-en="Team Collaboration" data-ar="العمل الجماعي">
                                     Team Collaboration
                                 </h3>
-                                <p
-                                data-en="Clear communicator who works effectively with users and cross-functional IT teams"
-                                data-ar="متواصل واضح يعمل بفعالية مع المستخدمين وفرق تقنية المعلومات متعددة التخصصات">
+                                <p data-en="Clear communicator who works effectively with users and cross-functional IT teams"
+                                    data-ar="متواصل واضح يعمل بفعالية مع المستخدمين وفرق تقنية المعلومات متعددة التخصصات">
                                     Clear communicator who works effectively with users and cross-functional IT teams
                                 </p>
                             </div>
@@ -149,9 +167,8 @@
                                 <h3 data-en="Problem Solving" data-ar="حل المشكلات">
                                     Problem Solving
                                 </h3>
-                                <p
-                                data-en="Analytical and structured approach focused on practical, reliable solutions"
-                                data-ar="نهج تحليلي ومنهجي يركز على تقديم حلول عملية وموثوقة">
+                                <p data-en="Analytical and structured approach focused on practical, reliable solutions"
+                                    data-ar="نهج تحليلي ومنهجي يركز على تقديم حلول عملية وموثوقة">
                                     Analytical and structured approach focused on practical, reliable solutions
                                 </p>
                             </div>
@@ -190,13 +207,15 @@
                     <h3 data-en="IT & Networking" data-ar="تقنية المعلومات والشبكات">IT & Networking</h3>
                     <div class="skill-tags">
                         <span class="skill-tag" data-en="IT Support" data-ar="الدعم التقني">IT Support</span>
-                        <span class="skill-tag" data-en="Troubleshooting" data-ar="استكشاف الأخطاء و إصلاحها">Troubleshooting</span>
+                        <span class="skill-tag" data-en="Troubleshooting"
+                            data-ar="استكشاف الأخطاء و إصلاحها">Troubleshooting</span>
                         <span class="skill-tag">TCP/IP</span>
                         <span class="skill-tag">Cisco Packet Tracer</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3 data-en="Operating Systems & Platforms" data-ar="أنظمة التشغيل والمنصات">Operating Systems & Platforms</h3>
+                    <h3 data-en="Operating Systems & Platforms" data-ar="أنظمة التشغيل والمنصات">Operating Systems &
+                        Platforms</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Windows</span>
                         <span class="skill-tag">Windows Server</span>
@@ -220,7 +239,7 @@
 
 
     <!-- Experience Section -->
-   <section id="experience" class="experience section">
+    <section id="experience" class="experience section">
         <div class="container">
             <h2 class="section-title" data-en="Work Experience" data-ar="الخبرة العملية">Work Experience</h2>
             <div class="timeline">
@@ -228,15 +247,26 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
-                            <h3 data-en="IT Service Desk Analyst" data-ar="محلل دعم فني لتقنية المعلومات">IT Service Desk Analyst</h3>
-                            <span class="timeline-date" data-en="September 2023 – Present" data-ar="سبتمبر 2023 – حتى الآن">September 2023 – Present</span>
+                            <h3 data-en="IT Service Desk Analyst" data-ar="محلل دعم فني لتقنية المعلومات">IT Service
+                                Desk Analyst</h3>
+                            <span class="timeline-date" data-en="September 2023 – Present"
+                                data-ar="سبتمبر 2023 – حتى الآن">September 2023 – Present</span>
                         </div>
-                        <p class="timeline-company" data-en="CNS, Dubai, UAE" data-ar="شركة CNS، دبي، الإمارات">CNS, Dubai, UAE</p>
+                        <p class="timeline-company" data-en="CNS, Dubai, UAE" data-ar="شركة CNS، دبي، الإمارات">CNS,
+                            Dubai, UAE</p>
                         <ul class="timeline-description">
-                            <li data-en="Troubleshoot and resolve software and network-related issues for end users" data-ar="تشخيص وحل مشكلات البرمجيات والشبكات للمستخدمين">Troubleshoot and resolve software and network-related issues for end users</li>
-                            <li data-en="Provide technical support through multiple channels while ensuring minimal downtime" data-ar="تقديم الدعم الفني عبر قنوات متعددة مع ضمان تقليل فترات التوقف">Provide technical support through multiple channels while ensuring minimal downtime</li>
-                            <li data-en="Manage user accounts, permissions, and IT requests using ticketing systems" data-ar="إدارة حسابات المستخدمين والصلاحيات وطلبات تقنية المعلومات باستخدام أنظمة التذاكر">Manage user accounts, permissions, and IT requests using ticketing systems</li>
-                            <li data-en="Collaborate with teams to improve system efficiency and user experience" data-ar="التعاون مع الفرق لتحسين كفاءة الأنظمة وتجربة المستخدم">Collaborate with teams to improve system efficiency and user experience</li>
+                            <li data-en="Troubleshoot and resolve software and network-related issues for end users"
+                                data-ar="تشخيص وحل مشكلات البرمجيات والشبكات للمستخدمين">Troubleshoot and resolve
+                                software and network-related issues for end users</li>
+                            <li data-en="Provide technical support through multiple channels while ensuring minimal downtime"
+                                data-ar="تقديم الدعم الفني عبر قنوات متعددة مع ضمان تقليل فترات التوقف">Provide
+                                technical support through multiple channels while ensuring minimal downtime</li>
+                            <li data-en="Manage user accounts, permissions, and IT requests using ticketing systems"
+                                data-ar="إدارة حسابات المستخدمين والصلاحيات وطلبات تقنية المعلومات باستخدام أنظمة التذاكر">
+                                Manage user accounts, permissions, and IT requests using ticketing systems</li>
+                            <li data-en="Collaborate with teams to improve system efficiency and user experience"
+                                data-ar="التعاون مع الفرق لتحسين كفاءة الأنظمة وتجربة المستخدم">Collaborate with teams
+                                to improve system efficiency and user experience</li>
                         </ul>
                     </div>
                 </div>
@@ -246,14 +276,24 @@
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <h3 data-en="Helpdesk Intern" data-ar="متدرب دعم فني">Helpdesk Intern</h3>
-                            <span class="timeline-date" data-en="March 2023 – September 2023" data-ar="مارس 2023 – سبتمبر 2023">March 2023 – September 2023</span>
+                            <span class="timeline-date" data-en="March 2023 – September 2023"
+                                data-ar="مارس 2023 – سبتمبر 2023">March 2023 – September 2023</span>
                         </div>
-                        <p class="timeline-company" data-en="Casper Computer, Ajman, UAE" data-ar="شركة كاسبر للكمبيوتر، عجمان، الإمارات">Casper Computer, Ajman, UAE</p>
+                        <p class="timeline-company" data-en="Casper Computer, Ajman, UAE"
+                            data-ar="شركة كاسبر للكمبيوتر، عجمان، الإمارات">Casper Computer, Ajman, UAE</p>
                         <ul class="timeline-description">
-                            <li data-en="Provided technical support for hardware and software issues" data-ar="تقديم الدعم الفني لمشكلات الأجهزة والبرمجيات">Provided technical support for hardware and software issues</li>
-                            <li data-en="Installed, configured, and maintained desktop and laptop systems" data-ar="تثبيت وتهيئة وصيانة أنظمة أجهزة الحاسوب المكتبية والمحمولة">Installed, configured, and maintained desktop and laptop systems</li>
-                            <li data-en="Diagnosed and repaired system malfunctions including hardware replacements" data-ar="تشخيص وإصلاح أعطال الأنظمة بما في ذلك استبدال مكونات الأجهزة">Diagnosed and repaired system malfunctions including hardware replacements</li>
-                            <li data-en="Assisted with system upgrades and data recovery tasks" data-ar="المساعدة في ترقية الأنظمة وتنفيذ مهام استعادة البيانات">Assisted with system upgrades and data recovery tasks</li>
+                            <li data-en="Provided technical support for hardware and software issues"
+                                data-ar="تقديم الدعم الفني لمشكلات الأجهزة والبرمجيات">Provided technical support for
+                                hardware and software issues</li>
+                            <li data-en="Installed, configured, and maintained desktop and laptop systems"
+                                data-ar="تثبيت وتهيئة وصيانة أنظمة أجهزة الحاسوب المكتبية والمحمولة">Installed,
+                                configured, and maintained desktop and laptop systems</li>
+                            <li data-en="Diagnosed and repaired system malfunctions including hardware replacements"
+                                data-ar="تشخيص وإصلاح أعطال الأنظمة بما في ذلك استبدال مكونات الأجهزة">Diagnosed and
+                                repaired system malfunctions including hardware replacements</li>
+                            <li data-en="Assisted with system upgrades and data recovery tasks"
+                                data-ar="المساعدة في ترقية الأنظمة وتنفيذ مهام استعادة البيانات">Assisted with system
+                                upgrades and data recovery tasks</li>
                         </ul>
                     </div>
                 </div>
@@ -263,14 +303,25 @@
                     <div class="timeline-content glass-card">
                         <div class="timeline-header">
                             <h3 data-en="Web Development Intern" data-ar="متدرب تطوير ويب">Web Development Intern</h3>
-                            <span class="timeline-date" data-en="September 2022 – March 2023" data-ar="سبتمبر 2022 – مارس 2023">September 2022 – March 2023</span>
+                            <span class="timeline-date" data-en="September 2022 – March 2023"
+                                data-ar="سبتمبر 2022 – مارس 2023">September 2022 – March 2023</span>
                         </div>
-                        <p class="timeline-company" data-en="Analytica FZE, Dubai, UAE" data-ar="شركة Analytica FZE، دبي، الإمارات">Analytica FZE, Dubai, UAE</p>
+                        <p class="timeline-company" data-en="Analytica FZE, Dubai, UAE"
+                            data-ar="شركة Analytica FZE، دبي، الإمارات">Analytica FZE, Dubai, UAE</p>
                         <ul class="timeline-description">
-                            <li data-en="Worked on front-end and back-end web development using HTML, CSS, JavaScript, PHP, Laravel, and SQL" data-ar="العمل على تطوير الواجهات الأمامية والخلفية باستخدام HTML و CSS و JavaScript و PHP و Laravel و SQL">Worked on front-end and back-end web development using HTML, CSS, JavaScript, PHP, Laravel, and SQL</li>
-                            <li data-en="Assisted in building responsive and user-friendly web applications" data-ar="المساعدة في بناء تطبيقات ويب متجاوبة وسهلة الاستخدام">Assisted in building responsive and user-friendly web applications</li>
-                            <li data-en="Participated in debugging, testing, and improving application performance" data-ar="المشاركة في تصحيح الأخطاء واختبار التطبيقات وتحسين الأداء">Participated in debugging, testing, and improving application performance</li>
-                            <li data-en="Collaborated with senior developers on full-stack solutions" data-ar="التعاون مع المطورين ذوي الخبرة في حلول متكاملة">Collaborated with senior developers on full-stack solutions</li>
+                            <li data-en="Worked on front-end and back-end web development using HTML, CSS, JavaScript, PHP, Laravel, and SQL"
+                                data-ar="العمل على تطوير الواجهات الأمامية والخلفية باستخدام HTML و CSS و JavaScript و PHP و Laravel و SQL">
+                                Worked on front-end and back-end web development using HTML, CSS, JavaScript, PHP,
+                                Laravel, and SQL</li>
+                            <li data-en="Assisted in building responsive and user-friendly web applications"
+                                data-ar="المساعدة في بناء تطبيقات ويب متجاوبة وسهلة الاستخدام">Assisted in building
+                                responsive and user-friendly web applications</li>
+                            <li data-en="Participated in debugging, testing, and improving application performance"
+                                data-ar="المشاركة في تصحيح الأخطاء واختبار التطبيقات وتحسين الأداء">Participated in
+                                debugging, testing, and improving application performance</li>
+                            <li data-en="Collaborated with senior developers on full-stack solutions"
+                                data-ar="التعاون مع المطورين ذوي الخبرة في حلول متكاملة">Collaborated with senior
+                                developers on full-stack solutions</li>
                         </ul>
                     </div>
                 </div>
@@ -289,9 +340,13 @@
                 </div>
                 <div class="resume-content">
                     <h2 data-en="Download My Resume" data-ar="تحميل سيرتي الذاتية">Download My Resume</h2>
-                    <p data-en="Get a comprehensive overview of my experience, skills, and accomplishments in a traditional resume format." data-ar="احصل على نظرة شاملة عن خبرتي ومهاراتي وإنجازاتي بتنسيق السيرة الذاتية التقليدي.">Get a comprehensive overview of my experience, skills, and accomplishments in a traditional resume format.</p>
+                    <p data-en="Get a comprehensive overview of my experience, skills, and accomplishments in a traditional resume format."
+                        data-ar="احصل على نظرة شاملة عن خبرتي ومهاراتي وإنجازاتي بتنسيق السيرة الذاتية التقليدي.">Get a
+                        comprehensive overview of my experience, skills, and accomplishments in a traditional resume
+                        format.</p>
                     <a href="Ahmed_Radi_Resume.pdf" class="btn btn-primary" download aria-label="Download resume PDF">
-                        <i class="fas fa-download" aria-hidden="true"></i> <span data-en="Download Resume (PDF)" data-ar="تحميل السيرة الذاتية (PDF)">Download Resume (PDF)</span>
+                        <i class="fas fa-download" aria-hidden="true"></i> <span data-en="Download Resume (PDF)"
+                            data-ar="تحميل السيرة الذاتية (PDF)">Download Resume (PDF)</span>
                     </a>
                 </div>
             </div>
@@ -303,8 +358,12 @@
         <div class="container">
             <h2 class="section-title" data-en="Get In Touch" data-ar="تواصل معي">Get In Touch</h2>
             <div class="contact-content">
-                <p class="contact-intro" data-en="I'm always interested in hearing about new opportunities, collaborations, or just connecting with fellow tech professionals. Feel free to reach out through any of the channels below!" data-ar="أنا دائماً مهتم بسماع الفرص الجديدة والتعاون أو التواصل مع المتخصصين في التكنولوجيا. لا تتردد في التواصل من خلال أي من القنوات أدناه!">I'm always interested in hearing about new opportunities, collaborations, or just connecting with fellow tech professionals. Feel free to reach out through any of the channels below!</p>
-                
+                <p class="contact-intro"
+                    data-en="I'm always interested in hearing about new opportunities, collaborations, or just connecting with fellow tech professionals. Feel free to reach out through any of the channels below!"
+                    data-ar="أنا دائماً مهتم بسماع الفرص الجديدة والتعاون أو التواصل مع المتخصصين في التكنولوجيا. لا تتردد في التواصل من خلال أي من القنوات أدناه!">
+                    I'm always interested in hearing about new opportunities, collaborations, or just connecting with
+                    fellow tech professionals. Feel free to reach out through any of the channels below!</p>
+
                 <!-- Contact Methods Grid -->
                 <div class="contact-methods-grid">
                     <a href="mailto:ahmadrade2023@gmail.com" class="contact-card glass-card" aria-label="Email contact">
@@ -315,16 +374,18 @@
                         <p class="contact-card-detail">ahmadrade2023@gmail.com</p>
                         <span class="contact-card-action" data-en="Send Email" data-ar="إرسال بريد">Send Email</span>
                     </a>
-                    
-                    <a href="https://wa.me/971585229499" target="_blank" rel="noopener noreferrer" class="contact-card glass-card" aria-label="WhatsApp contact">
+
+                    <a href="https://wa.me/971585229499" target="_blank" rel="noopener noreferrer"
+                        class="contact-card glass-card" aria-label="WhatsApp contact">
                         <div class="contact-card-icon whatsapp">
                             <i class="fab fa-whatsapp" aria-hidden="true"></i>
                         </div>
                         <h3 data-en="WhatsApp" data-ar="واتساب">WhatsApp</h3>
                         <p class="contact-card-detail">+971 58 522 9499</p>
-                        <span class="contact-card-action" data-en="Send Message" data-ar="إرسال رسالة">Send Message</span>
+                        <span class="contact-card-action" data-en="Send Message" data-ar="إرسال رسالة">Send
+                            Message</span>
                     </a>
-                    
+
                     <a href="tel:+971585229499" class="contact-card glass-card" aria-label="Phone contact">
                         <div class="contact-card-icon phone">
                             <i class="fas fa-phone" aria-hidden="true"></i>
@@ -333,32 +394,37 @@
                         <p class="contact-card-detail">+971 58 522 9499</p>
                         <span class="contact-card-action" data-en="Call Now" data-ar="اتصل الآن">Call Now</span>
                     </a>
-                    
-                    <a href="https://www.linkedin.com/in/ahmed-rade-aab7a3298/" target="_blank" rel="noopener noreferrer" class="contact-card glass-card" aria-label="LinkedIn profile">
+
+                    <a href="https://www.linkedin.com/in/ahmed-rade-aab7a3298/" target="_blank"
+                        rel="noopener noreferrer" class="contact-card glass-card" aria-label="LinkedIn profile">
                         <div class="contact-card-icon linkedin">
                             <i class="fab fa-linkedin" aria-hidden="true"></i>
                         </div>
                         <h3 data-en="LinkedIn" data-ar="لينكد إن">LinkedIn</h3>
-                        <p class="contact-card-detail" data-en="Connect Professionally" data-ar="تواصل بإحترافية">Connect Professionally</p>
+                        <p class="contact-card-detail" data-en="Connect Professionally" data-ar="تواصل بإحترافية">
+                            Connect Professionally</p>
                         <span class="contact-card-action" data-en="View Profile" data-ar="عرض الملف">View Profile</span>
                     </a>
-                    
-                    <a href="https://github.com/Ahmed-Rade" target="_blank" rel="noopener noreferrer" class="contact-card glass-card" aria-label="GitHub profile">
+
+                    <a href="https://github.com/Ahmed-Rade" target="_blank" rel="noopener noreferrer"
+                        class="contact-card glass-card" aria-label="GitHub profile">
                         <div class="contact-card-icon github">
                             <i class="fab fa-github" aria-hidden="true"></i>
                         </div>
                         <h3 data-en="GitHub" data-ar="جيت هب">GitHub</h3>
                         <p class="contact-card-detail">View My Code</p>
-                        <span class="contact-card-action" data-en="Browse Projects" data-ar="تصفح المشاريع">Browse Projects</span>
+                        <span class="contact-card-action" data-en="Browse Projects" data-ar="تصفح المشاريع">Browse
+                            Projects</span>
                     </a>
-                    
+
                     <div class="contact-card glass-card location-card">
                         <div class="contact-card-icon location">
                             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         </div>
                         <h3 data-en="Location" data-ar="الموقع">Location</h3>
                         <p class="contact-card-detail" data-en="UAE" data-ar="الإمارات">UAE</p>
-                        <span class="contact-card-status" data-en="Open to opportunities" data-ar="متاح للفرص">Open to opportunities</span>
+                        <span class="contact-card-status" data-en="Open to opportunities" data-ar="متاح للفرص">Open to
+                            opportunities</span>
                     </div>
                 </div>
             </div>
@@ -370,21 +436,25 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-social">
-                    <a href="https://github.com/Ahmed-Rade" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+                    <a href="https://github.com/Ahmed-Rade" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub profile">
                         <i class="fab fa-github" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/ahmed-rade-aab7a3298/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                    <a href="https://www.linkedin.com/in/ahmed-rade-aab7a3298/" target="_blank"
+                        rel="noopener noreferrer" aria-label="LinkedIn profile">
                         <i class="fab fa-linkedin" aria-hidden="true"></i>
                     </a>
                     <a href="mailto:ahmadrade2023@gmail.com" aria-label="Email contact">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
                     </a>
-                    <a href="https://wa.me/971585229499" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp contact">
+                    <a href="https://wa.me/971585229499" target="_blank" rel="noopener noreferrer"
+                        aria-label="WhatsApp contact">
                         <i class="fab fa-whatsapp" aria-hidden="true"></i>
                     </a>
                 </div>
                 <p class="footer-copyright">
-                    &copy; <span id="currentYear">2026</span> Ahmed Rade. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span>
+                    &copy; <span id="currentYear">2026</span> Ahmed Rade. <span data-en="All rights reserved."
+                        data-ar="جميع الحقوق محفوظة.">All rights reserved.</span>
                 </p>
             </div>
         </div>
@@ -392,4 +462,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

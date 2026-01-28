@@ -15,19 +15,19 @@
     --color-shadow: rgba(43, 43, 43, 0.1);
     --color-error: #d64545;
     --color-success: #5b8c5a;
-    
+
     /* Typography */
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'Work Sans', sans-serif;
     --font-arabic: 'Cairo', sans-serif;
-    
+
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --spacing-lg: 4rem;
     --spacing-xl: 6rem;
-    
+
     /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-medium: 0.4s ease;
@@ -41,23 +41,23 @@ body.dark-mode {
     /* Dark backgrounds - not pure black for eye comfort */
     --color-bg-primary: #0f1419;
     --color-bg-secondary: #1a1f26;
-    
+
     /* High contrast text */
     --color-text-primary: #e6e9ef;
     --color-text-secondary: #9ca3b0;
-    
+
     /* Modern accent colors */
     --color-accent: #ff6b35;
     --color-accent-dark: #ff8557;
     --color-accent-light: #ff9f7a;
-    
+
     /* Glass morphism for dark mode */
     --color-glass-bg: rgba(26, 31, 38, 0.8);
     --color-glass-border: rgba(255, 107, 53, 0.2);
-    
+
     /* Subtle shadows with light glow */
     --color-shadow: rgba(255, 107, 53, 0.1);
-    
+
     /* Status colors */
     --color-error: #ff6b6b;
     --color-success: #51cf66;
@@ -149,16 +149,29 @@ body {
 /* ===================================
    Typography
    =================================== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-display);
     font-weight: 600;
     line-height: 1.3;
     margin-bottom: var(--spacing-sm);
 }
 
-h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
 
 p {
     margin-bottom: var(--spacing-sm);
@@ -170,7 +183,8 @@ a {
     transition: color var(--transition-fast);
 }
 
-a:hover, a:focus {
+a:hover,
+a:focus {
     color: var(--color-accent-dark);
 }
 
@@ -206,6 +220,7 @@ ul {
         opacity: 1;
         transform: translateY(0);
     }
+
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -233,26 +248,36 @@ ul {
 /* ===================================
    Navigation with Responsive Toggle Switches
    =================================== */
+/* ===================================
+   Navigation with Responsive Layout
+   =================================== */
 .nav {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
+    height: 80px;
+    /* Fixed height to prevent layout shifts */
     background: var(--color-glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-glass-border);
     z-index: 1000;
     transition: all var(--transition-medium);
+    display: flex;
+    align-items: center;
 }
 
 .nav-container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: 0 var(--spacing-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    gap: 1rem;
 }
 
 .logo {
@@ -261,24 +286,30 @@ ul {
     font-weight: 700;
     color: var(--color-accent);
     letter-spacing: -0.02em;
-    z-index: 1001;
+    z-index: 1002;
+    flex-shrink: 0;
 }
 
 .logo:hover {
     color: var(--color-accent-dark);
 }
 
+/* ===================================
+   Navigation Menu (Desktop & Mobile Drawer)
+   =================================== */
 .nav-menu {
     display: flex;
-    gap: var(--spacing-md);
+    gap: 2.5rem;
     align-items: center;
+    margin-left: auto;
+    padding: 0;
 }
 
 .nav-menu a {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--color-text-primary);
-    padding: var(--spacing-xs) 0;
+    padding: 0.5rem 0;
     position: relative;
 }
 
@@ -300,41 +331,25 @@ ul {
 }
 
 /* ===================================
-   Toggle Switches - Desktop: Fixed Top-Right, Mobile: Centered
+   Toggle Switches - Flexbox Positioning
    =================================== */
 .toggle-switches {
     display: flex;
     gap: 0.75rem;
     align-items: center;
     z-index: 1002;
-}
-
-/* Desktop positioning - Fixed top-right */
-@media (min-width: 769px) {
-    .toggle-switches {
-        position: fixed;
-        top: 1rem;
-        right: 1.5rem;
-    }
-}
-
-/* Mobile positioning - Centered in header */
-@media (max-width: 768px) {
-    .toggle-switches {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+    /* Prevent shrinking */
+    flex-shrink: 0;
+    margin-left: 1.5rem;
+    /* Separate from menu on desktop */
 }
 
 .toggle-btn {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 2px solid var(--color-glass-border);
-    background: var(--color-glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--color-glass-border);
+    background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -342,31 +357,28 @@ ul {
     transition: all var(--transition-fast);
     font-size: 1rem;
     color: var(--color-text-primary);
+    box-shadow: 0 2px 5px var(--color-shadow);
+}
+
+body.dark-mode .toggle-btn {
+    background: rgba(30, 30, 30, 0.5);
 }
 
 .toggle-btn:hover {
     border-color: var(--color-accent);
     background: var(--color-accent);
     color: #fff;
-    transform: scale(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--color-shadow);
 }
 
 .toggle-btn:active {
     transform: scale(0.95);
 }
 
-body.dark-mode .toggle-btn {
-    background: var(--color-glass-bg);
-}
-
-body.dark-mode #darkModeToggle:hover,
-body.dark-mode .toggle-btn:hover {
-    background: var(--color-accent);
-}
-
 .lang-toggle .lang-text {
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-weight: 700;
+    font-size: 0.8rem;
     letter-spacing: 0.5px;
 }
 
@@ -375,22 +387,129 @@ body.dark-mode .toggle-btn:hover {
     transition: transform var(--transition-medium);
 }
 
+.toggle-btn:hover i {
+    transform: rotate(15deg);
+}
+
+/* ===================================
+   Mobile Navigation & Responsive Styles
+   =================================== */
 .nav-toggle {
     display: none;
     flex-direction: column;
-    gap: 5px;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: var(--spacing-xs);
-    z-index: 1001;
+    padding: 0;
+    z-index: 1003;
+    margin-left: 1rem;
 }
 
 .nav-toggle span {
-    width: 25px;
-    height: 2px;
+    width: 100%;
+    height: 3px;
     background-color: var(--color-text-primary);
-    transition: all var(--transition-fast);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    transform-origin: left;
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 991px) {
+
+    /* Navbar Layout for Mobile */
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Push toggles to the right, next to hamburger */
+    .toggle-switches {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    /* Mobile Menu Drawer */
+    .nav-menu {
+        position: fixed;
+        margin: 0;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        /* Partial width to see background */
+        max-width: 400px;
+        height: 100vh;
+        background: var(--color-glass-bg);
+        /* Use glass effect */
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        /* Ensure border allows distinction */
+        border-left: 1px solid var(--color-glass-border);
+    }
+
+    /* Ensure background is solid enough in dark mode */
+    body.dark-mode .nav-menu {
+        background: rgba(15, 20, 25, 0.95);
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu a {
+        font-size: 1.5rem;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Hamburger Animation */
+    .nav-toggle[aria-expanded="true"] span:first-child {
+        transform: rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+        width: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:last-child {
+        transform: rotate(-45deg);
+    }
+}
+
+/* Very Small Screens */
+@media (max-width: 400px) {
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .toggle-switches {
+        gap: 0.5rem;
+    }
+
+    .toggle-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
 }
 
 /* ===================================
@@ -471,8 +590,15 @@ body.dark-mode .toggle-btn:hover {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.1); }
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
 }
 
 .scroll-indicator {
@@ -490,8 +616,15 @@ body.dark-mode .toggle-btn:hover {
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
 }
 
 /* ===================================
@@ -954,17 +1087,18 @@ body.dark-mode .toggle-btn:hover {
    Responsive Design - Mobile
    =================================== */
 @media (max-width: 768px) {
+
     /* Mobile toggle button sizes */
     .toggle-btn {
         width: 38px;
         height: 38px;
         font-size: 0.9rem;
     }
-    
+
     .nav-toggle {
         display: flex;
     }
-    
+
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -979,26 +1113,26 @@ body.dark-mode .toggle-btn:hover {
         transition: left var(--transition-medium);
         box-shadow: 0 10px 30px var(--color-shadow);
     }
-    
+
     .nav-menu.active {
         left: 0;
     }
-    
+
     .nav-menu a {
         padding: var(--spacing-sm);
         text-align: center;
     }
-    
+
     /* Timeline mobile layout */
     .timeline::before {
         left: 20px;
     }
-    
+
     .timeline-marker {
         left: 20px;
         transform: translateX(-50%);
     }
-    
+
     .timeline-item:nth-child(odd) .timeline-content,
     .timeline-item:nth-child(even) .timeline-content {
         max-width: 100%;
@@ -1006,39 +1140,39 @@ body.dark-mode .toggle-btn:hover {
         margin-right: 0;
         text-align: left;
     }
-    
+
     body.rtl .timeline::before {
         left: auto;
         right: 20px;
     }
-    
+
     body.rtl .timeline-marker {
         left: auto;
         right: 20px;
     }
-    
+
     body.rtl .timeline-item:nth-child(odd) .timeline-content,
     body.rtl .timeline-item:nth-child(even) .timeline-content {
         margin-left: 0;
         margin-right: 50px;
         text-align: right;
     }
-    
+
     /* Contact cards */
     .contact-methods-grid {
         grid-template-columns: 1fr;
     }
-    
+
     /* Spacing adjustments */
     .section {
         padding: var(--spacing-lg) 0;
     }
-    
+
     .hero-cta {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .btn {
         width: 100%;
         max-width: 280px;
@@ -1060,6 +1194,7 @@ body.dark-mode .toggle-btn:hover {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -1069,18 +1204,19 @@ body.dark-mode .toggle-btn:hover {
    Print Styles
    =================================== */
 @media print {
+
     .nav,
     .toggle-switches,
     .footer-social,
     .scroll-indicator {
         display: none;
     }
-    
+
     body {
         background: white;
         color: black;
     }
-    
+
     .section {
         page-break-inside: avoid;
     }

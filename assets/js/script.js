@@ -136,14 +136,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const nav = document.querySelector('.nav');
 
     window.addEventListener('scroll', function () {
-        if (window.scrollY > 80) {
-            nav.style.boxShadow = '0 4px 20px rgba(43, 43, 43, 0.12)';
-            nav.style.height = '64px';
+        if (window.scrollY > 60) {
+            nav.style.boxShadow = '0 2px 16px rgba(43, 43, 43, 0.10)';
+            nav.style.height = '58px';
         } else {
             nav.style.boxShadow = 'none';
-            nav.style.height = '80px';
+            nav.style.height = '72px';
         }
-    });
+    }, { passive: true });
 
     // ===================================
     // Active Navigation Link Highlighting
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
     updateActiveLink(); // Run on load
 
     // ===================================
@@ -207,6 +207,14 @@ document.addEventListener('DOMContentLoaded', function () {
         item.style.transform = 'translateY(30px)';
         item.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
         observer.observe(item);
+    });
+
+    // Contact cards with staggered pop-in
+    document.querySelectorAll('.contact-card').forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(24px)';
+        card.style.transition = `opacity 0.5s ease ${index * 0.07}s, transform 0.5s ease ${index * 0.07}s`;
+        observer.observe(card);
     });
 
     // Highlight items
@@ -361,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             backToTop.classList.remove('visible');
         }
-    });
+    }, { passive: true });
 
     backToTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

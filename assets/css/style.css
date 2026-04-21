@@ -203,8 +203,7 @@ ul {
 
 .section {
     padding: var(--spacing-xl) 0;
-    animation: fadeInUp 0.8s ease forwards;
-    opacity: 0;
+    /* BUG FIX: removed CSS animation — JS IntersectionObserver handles reveal */
 }
 
 .section:nth-child(odd) {
@@ -1191,14 +1190,128 @@ body.dark-mode .toggle-btn {
    Animations
    =================================== */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
+
+/* ===================================
+   Nav Height Transition (scroll shrink)
+   =================================== */
+.nav {
+    transition: height var(--transition-fast), box-shadow var(--transition-fast),
+                background var(--transition-medium) !important;
+}
+
+/* ===================================
+   Timeline Marker Pulse Ring
+   =================================== */
+.timeline-marker {
+    overflow: visible;
+}
+
+.timeline-marker-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    animation: markerPulse 2.2s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes markerPulse {
+    0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.7; }
+    70%  { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+}
+
+/* ===================================
+   Typewriter Cursor on Hero Subtitle
+   =================================== */
+.hero-subtitle::after {
+    content: '|';
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--color-accent);
+    animation: cursorBlink 0.75s step-end infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+/* ===================================
+   Skill Tag Hover — Enhanced
+   =================================== */
+.skill-tag:hover {
+    background: var(--color-accent);
+    color: #fff;
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 6px 16px var(--color-shadow);
+    border-color: var(--color-accent);
+}
+
+/* ===================================
+   Back to Top Button
+   =================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 4px 16px var(--color-shadow);
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity var(--transition-fast), transform var(--transition-fast),
+                background var(--transition-fast);
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.back-to-top:hover {
+    background: var(--color-accent-dark);
+    transform: translateY(-3px);
+}
+
+body.rtl .back-to-top {
+    right: auto;
+    left: 2rem;
+}
+
+/* ===================================
+   Glass Card — smoother hover
+   =================================== */
+.glass-card {
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium) !important;
+}
+
+/* ===================================
+   Footer Social — staggered hover glow
+   =================================== */
+.footer-social a:nth-child(1) { transition-delay: 0s; }
+.footer-social a:nth-child(2) { transition-delay: 0.04s; }
+.footer-social a:nth-child(3) { transition-delay: 0.08s; }
+.footer-social a:nth-child(4) { transition-delay: 0.12s; }
 
 /* ===================================
    Print Styles

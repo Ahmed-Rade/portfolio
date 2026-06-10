@@ -144,6 +144,7 @@ body.rtl .section-title::after {
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden; /* FIX: prevent horizontal scroll on mobile */
 }
 
 body {
@@ -153,7 +154,10 @@ body {
     color: var(--color-text-primary);
     background-color: var(--color-bg-primary);
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
     transition: background-color var(--transition-medium), color var(--transition-medium);
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* ===================================
@@ -571,26 +575,34 @@ body.dark-mode .toggle-switches {
    =================================== */
 .hero {
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     padding-top: 72px;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
     background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    overflow: hidden; /* FIX: canvas/decoration can't bleed out */
 }
 
 .hero-content {
     text-align: center;
     max-width: 900px;
+    width: 100%;
     padding: var(--spacing-md);
+    padding-left: clamp(1rem, 5vw, 2rem);
+    padding-right: clamp(1rem, 5vw, 2rem);
     position: relative;
     z-index: 1;
+    box-sizing: border-box;
 }
 
 .hero-greeting {
     display: block;
-    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-size: clamp(0.9rem, 3vw, 1.3rem);
     font-weight: 300;
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-xs);
@@ -603,20 +615,23 @@ body.dark-mode .toggle-switches {
     letter-spacing: -0.03em;
     color: var(--color-text-primary);
     animation: fadeInUp 0.8s ease 0.2s both;
+    word-break: break-word; /* FIX: long names don't overflow on tiny screens */
 }
 
 .hero-subtitle {
-    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-size: clamp(1rem, 4vw, 1.8rem);
     color: var(--color-accent);
     font-weight: 500;
     margin: var(--spacing-sm) 0;
     animation: fadeInUp 0.8s ease 0.4s both;
+    min-height: 1.5em; /* FIX: prevent layout jump during typewriter */
 }
 
 .hero-tagline {
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
     color: var(--color-text-secondary);
     max-width: 600px;
+    width: 100%;
     margin: 0 auto var(--spacing-md);
     animation: fadeInUp 0.8s ease 0.6s both;
 }
@@ -627,12 +642,13 @@ body.dark-mode .toggle-switches {
     justify-content: center;
     flex-wrap: wrap;
     animation: fadeInUp 0.8s ease 0.8s both;
+    width: 100%;
 }
 
 .hero-decoration {
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: min(400px, 90vw); /* FIX: cap to viewport width */
+    height: min(400px, 90vw);
     border-radius: 50%;
     background: radial-gradient(circle, var(--color-shadow) 0%, transparent 70%);
     top: 50%;
@@ -762,7 +778,7 @@ body.dark-mode .toggle-switches {
 
 .about-highlights {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
     gap: var(--spacing-md);
     margin-top: var(--spacing-lg);
 }
@@ -804,7 +820,7 @@ body.dark-mode .toggle-switches {
    =================================== */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: var(--spacing-md);
 }
 
@@ -900,6 +916,9 @@ body.dark-mode .toggle-switches {
 
 .timeline-content {
     max-width: 45%;
+    min-width: 0; /* FIX: allow content to shrink below intrinsic width */
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .timeline-header {
@@ -942,9 +961,11 @@ body.dark-mode .toggle-switches {
    =================================== */
 .resume-box {
     max-width: 700px;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
-    padding: var(--spacing-lg);
+    padding: clamp(1.5rem, 6vw, 4rem);
+    box-sizing: border-box;
 }
 
 .resume-icon {
@@ -983,7 +1004,7 @@ body.dark-mode .toggle-switches {
 
 .contact-methods-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: var(--spacing-md);
 }
 
@@ -1153,60 +1174,187 @@ body.dark-mode .toggle-switches {
         display: flex;
     }
 
-    /* Timeline mobile layout */
-    .timeline::before {
-        left: 20px;
+    /* Container padding tighter on small screens */
+    .container {
+        padding: 0 1rem;
     }
 
-    .timeline-marker {
-        left: 20px;
-        transform: translateX(-50%);
-    }
-
-    .timeline-item:nth-child(odd) .timeline-content,
-    .timeline-item:nth-child(even) .timeline-content {
-        max-width: 100%;
-        margin-left: 50px;
-        margin-right: 0;
-        text-align: left;
-    }
-
-    body.rtl .timeline::before {
-        left: auto;
-        right: 20px;
-    }
-
-    body.rtl .timeline-marker {
-        left: auto;
-        right: 20px;
-    }
-
-    body.rtl .timeline-item:nth-child(odd) .timeline-content,
-    body.rtl .timeline-item:nth-child(even) .timeline-content {
-        margin-left: 0;
-        margin-right: 50px;
-        text-align: right;
-    }
-
-    /* Contact cards */
-    .contact-methods-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Spacing adjustments */
+    /* Section spacing reduced */
     .section {
         padding: var(--spacing-lg) 0;
     }
 
+    /* ---- About ---- */
+    .about-text {
+        font-size: 1rem;
+    }
+
+    .about-intro {
+        font-size: 1.05rem;
+    }
+
+    .about-highlights {
+        grid-template-columns: 1fr; /* FIX: force single col on narrow */
+        margin-top: var(--spacing-md);
+    }
+
+    .highlight-item {
+        padding: 1rem 1.25rem;
+    }
+
+    /* FIX: stat counters must not overflow */
+    .stat-counter {
+        font-size: 0.9rem;
+        padding: 0.15rem 0.5rem;
+    }
+
+    /* ---- Skills ---- */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .skill-category {
+        padding: 1.25rem;
+    }
+
+    /* ---- Timeline — single column, left-rail ---- */
+    .timeline {
+        padding: 1rem 0;
+    }
+
+    .timeline::before {
+        left: 10px; /* FIX: was 20px which pushed marker off edge */
+        transform: none;
+    }
+
+    .timeline-marker {
+        left: 10px;
+        transform: translateX(-50%);
+        top: 16px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        max-width: calc(100% - 40px); /* FIX: explicit calc prevents overflow */
+        width: calc(100% - 40px);
+        margin-left: 36px;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .timeline-header {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .timeline-date {
+        font-size: 0.8rem;
+    }
+
+    /* ---- RTL timeline mobile ---- */
+    body.rtl .timeline::before {
+        left: auto;
+        right: 10px;
+        transform: none;
+    }
+
+    body.rtl .timeline-marker {
+        left: auto;
+        right: 10px;
+        transform: translateX(50%);
+    }
+
+    body.rtl .timeline-item:nth-child(odd) .timeline-content,
+    body.rtl .timeline-item:nth-child(even) .timeline-content {
+        max-width: calc(100% - 40px);
+        width: calc(100% - 40px);
+        margin-left: 0;
+        margin-right: 36px;
+        text-align: right;
+    }
+
+    /* ---- Contact ---- */
+    .contact-methods-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .contact-card {
+        padding: 1.25rem;
+    }
+
+    /* ---- Hero CTA buttons ---- */
     .hero-cta {
         flex-direction: column;
         align-items: center;
+        gap: 0.75rem;
     }
 
     .btn {
         width: 100%;
-        max-width: 280px;
+        max-width: 300px;
         justify-content: center;
+    }
+
+    /* ---- Resume box ---- */
+    .resume-icon {
+        font-size: 3rem;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+        padding: var(--spacing-md) 0;
+    }
+
+    /* ---- Disable tilt + magnetic on touch devices ---- */
+    .glass-card,
+    .highlight-item {
+        transform-style: flat; /* no 3D on mobile */
+    }
+}
+
+/* ---- Small phones (≤ 400px) ---- */
+@media (max-width: 400px) {
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .toggle-switches {
+        gap: 0.25rem;
+    }
+
+    .toggle-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .nav-container {
+        padding: 0 0.75rem;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    h2 {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    h3 {
+        font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+    }
+
+    .section-title {
+        font-size: clamp(1.4rem, 6vw, 2rem);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 30px;
+        width: calc(100% - 30px);
+        max-width: calc(100% - 30px);
     }
 }
 
@@ -1214,6 +1362,18 @@ body.dark-mode .toggle-switches {
 @media (min-width: 769px) and (max-width: 1024px) {
     .contact-methods-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+        margin-right: calc(50% + 20px);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-left: calc(50% + 20px);
     }
 }
 
@@ -1255,14 +1415,11 @@ body.dark-mode .toggle-switches {
 }
 
 /* ===================================
-   Performance — GPU-accelerated layers
+   Performance — GPU layers only where motion happens
+   (wide will-change on many elements causes mobile jank)
    =================================== */
 .nav,
-.hero,
-.glass-card,
-.skill-tag,
-.timeline-item,
-.contact-card {
+.hero {
     will-change: transform;
 }
 
@@ -1384,8 +1541,178 @@ body.rtl .back-to-top {
 .footer-social a:nth-child(4) { transition-delay: 0.12s; }
 
 /* ===================================
-   Print Styles
+   Reading Progress Bar
    =================================== */
+.nav-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-accent-light), var(--color-accent), var(--color-accent-dark));
+    z-index: 1005;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+}
+
+/* ===================================
+   Hero Noise Texture Overlay
+   =================================== */
+.hero-noise {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+}
+
+/* ===================================
+   Section Title — Animated underline draw
+   =================================== */
+.section-title::after {
+    width: 0;
+    transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section-title.line-drawn::after {
+    width: 60px;
+}
+
+/* ===================================
+   Button Ripple Effect
+   =================================== */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: rippleAnim 0.55s linear;
+    background: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+}
+
+@keyframes rippleAnim {
+    to { transform: scale(4); opacity: 0; }
+}
+
+/* ===================================
+   Timeline Line Fill on Scroll
+   =================================== */
+.timeline::before {
+    background: linear-gradient(to bottom, var(--color-accent) var(--timeline-fill, 0%), var(--color-glass-border) var(--timeline-fill, 0%));
+    transition: background 0.1s linear;
+}
+
+/* ===================================
+   Skill category alternating slide-in
+   =================================== */
+.skill-category {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.skill-category.from-right {
+    transform: translateX(30px);
+}
+
+.skill-category.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================
+   Glass card 3D tilt — GPU layer
+   =================================== */
+.glass-card, .highlight-item, .contact-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* ===================================
+   Animated stat counter in About
+   =================================== */
+.stat-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: rgba(139, 115, 85, 0.08);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 8px;
+    padding: 0.2rem 0.6rem;
+    margin: 0.15rem 0;
+}
+
+.stat-counter .count-num {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ===================================
+   Subtle focus-visible ring (accessibility)
+   =================================== */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ===================================
+   Magnetic button — slight scale on nearby hover handled in JS
+   Extra CSS: cursor glow dot
+   =================================== */
+.cursor-glow {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease;
+}
+
+body.dark-mode .cursor-glow {
+    mix-blend-mode: screen;
+}
+
+.cursor-glow.visible {
+    opacity: 0.5;
+}
+
+.cursor-glow.expanded {
+    width: 28px;
+    height: 28px;
+    opacity: 0.25;
+}
+
+@media (hover: none) {
+    .cursor-glow { display: none; }
+}
+
+/* ===================================
+   Scroll-reveal: from-left / from-right for highlight items
+   =================================== */
+.highlight-item:nth-child(odd) {
+    transform: translateX(-20px);
+}
+.highlight-item:nth-child(even) {
+    transform: translateX(20px);
+}
+
+
 @media print {
 
     .nav,
@@ -1402,5 +1729,70 @@ body.rtl .back-to-top {
 
     .section {
         page-break-inside: avoid;
+    }
+}
+
+/* ===================================
+   Reduced Motion — respect user preference
+   =================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ===================================
+   Touch device optimizations
+   =================================== */
+@media (hover: none) {
+    /* Remove hover states that don't apply on touch */
+    .glass-card:hover,
+    .highlight-item:hover {
+        transform: none;
+        box-shadow: 0 8px 32px var(--color-shadow);
+    }
+
+    /* Bigger tap targets */
+    .nav-menu li a {
+        padding: 0.75rem 1rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .toggle-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .footer-social a {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Skill tags: larger tap target */
+    .skill-tag {
+        padding: 0.6rem 1.1rem;
+        min-height: 36px;
+    }
+
+    /* Timeline line fill animation handled fine on touch */
+}
+
+/* ===================================
+   Mobile nav menu — prevent scroll bleed
+   =================================== */
+@media (max-width: 991px) {
+    body.nav-open {
+        overflow: hidden; /* FIX: prevent background scroll when menu open */
     }
 }

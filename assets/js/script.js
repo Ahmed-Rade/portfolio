@@ -1,9 +1,17 @@
 /* ===================================
    Portfolio Website JavaScript
-   Enhanced: Bug fixes + polished animations
+   v2 — Mobile perf fixes + enhanced animations
    =================================== */
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    // ===================================
+    // Device Detection
+    // ===================================
+    const isTouchDevice = window.matchMedia('(hover: none)').matches;
+    const isLowEnd = navigator.hardwareConcurrency <= 4 || navigator.deviceMemory <= 2;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobileViewport = () => window.innerWidth <= 768;
 
     // ===================================
     // Dark Mode Toggle
@@ -33,24 +41,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===================================
     // Language Toggle
-    // BUG FIX: tagElement → tagName (was already in source, kept correct)
-    // BUG FIX: data-en fallback so switching back to EN always works
-    // =================================== 
+    // ===================================
     const languageToggle = document.getElementById('languageToggle');
     const langText = languageToggle ? languageToggle.querySelector('.lang-text') : null;
     let currentLang = localStorage.getItem('language') || 'en';
 
-    // Cache original EN text on load so we can always restore it
     document.querySelectorAll('[data-en]').forEach(el => {
         if (!el.getAttribute('data-en-cached')) {
-            // Only cache if data-en is already set in HTML (not empty)
             const enVal = el.getAttribute('data-en');
             if (enVal) el.setAttribute('data-en-cached', 'true');
         }
     });
 
     if (currentLang === 'ar') {
-        switchToArabic(false); // false = no typewriter restart yet
+        switchToArabic(false);
     }
 
     if (languageToggle) {
@@ -75,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                 element.placeholder = element.getAttribute('data-placeholder-ar') || '';
             } else {
-                // BUG FIX: Don't overwrite .hero-subtitle mid-typewrite
                 if (element.classList.contains('hero-subtitle')) return;
                 element.textContent = arVal;
             }
@@ -160,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Nav: Scroll Shrink + Shadow
     // ===================================
     const nav = document.querySelector('.nav');
-    const isMobile = () => window.innerWidth <= 991;
 
     let ticking = false;
     window.addEventListener('scroll', function () {
@@ -168,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
             requestAnimationFrame(() => {
                 if (window.scrollY > 60) {
                     nav.style.boxShadow = '0 2px 20px rgba(43, 35, 22, 0.12)';
-                    nav.style.height = isMobile() ? '60px' : '58px';
+                    nav.style.height = isMobileViewport() ? '60px' : '58px';
                 } else {
                     nav.style.boxShadow = 'none';
                     nav.style.height = '72px';
@@ -205,20 +207,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===================================
     // Intersection Observer — Sections & Cards
-    // BUG FIX: Sections were animating via CSS before observer fired
-    // =================================== 
+    // ===================================
     const observerOptions = { threshold: 0.07, rootMargin: '0px 0px -50px 0px' };
 
     const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 if (entry.target.classList.contains('reveal-init')) {
-                    // Class-based reveal for tilt-affected cards (avoids
-                    // inline-transform conflicts with hover/tilt effects)
                     entry.target.classList.remove('reveal-init');
                     entry.target.classList.add('revealed');
-                    // Clear the stagger delay once revealed so hover/tilt
-                    // transitions aren't delayed afterwards
                     const el = entry.target;
                     setTimeout(() => { el.style.transitionDelay = ''; }, 700);
                 } else {
@@ -270,8 +267,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===================================
     // Typewriter Effect
-    // BUG FIX: deleting phase was stuck (isDeleting never set to true)
-    // BUG FIX: switching lang mid-type could leave cursor blinking on old text
     // ===================================
     const heroSubtitle = document.querySelector('.hero-subtitle');
     let typeTimeout;
@@ -290,7 +285,6 @@ document.addEventListener('DOMContentLoaded', function () {
             heroSubtitle.textContent = fullText.substring(0, typeIndex + 1);
             typeIndex++;
             if (typeIndex === fullText.length) {
-                // Finished typing — pause then start deleting
                 typeTimeout = setTimeout(() => {
                     isDeleting = true;
                     typeWrite();
@@ -330,17 +324,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ===================================
-    // Hero Floating Particles
+    // Hero Canvas Particles
+    // PERF FIX: Disabled on mobile/touch/low-end devices
+    // PERF FIX: Reduced particle count; use offscreen canvas if available
     // ===================================
     const hero = document.querySelector('.hero');
-    if (hero) {
+    if (hero && !isTouchDevice && !isLowEnd && !prefersReducedMotion) {
         const canvas = document.createElement('canvas');
         canvas.setAttribute('aria-hidden', 'true');
-        canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.3';
+        canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.28';
         hero.appendChild(canvas);
 
         const ctx = canvas.getContext('2d');
-        let particles = [];
         let animFrame;
 
         function resizeCanvas() {
@@ -352,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(resizeCanvas, 120);
+            resizeTimer = setTimeout(resizeCanvas, 150);
         });
 
         function getAccentColor() {
@@ -360,15 +355,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 .getPropertyValue('--color-accent').trim() || '#8b7355';
         }
 
-        const PARTICLE_COUNT = 24;
+        // Reduced from 24 → 16 for better desktop perf too
+        const PARTICLE_COUNT = 16;
+        const particles = [];
         for (let i = 0; i < PARTICLE_COUNT; i++) {
             particles.push({
-                x: Math.random() * (canvas.width || 800),
-                y: Math.random() * (canvas.height || 600),
-                r: Math.random() * 2.2 + 0.6,
-                dx: (Math.random() - 0.5) * 0.32,
-                dy: (Math.random() - 0.5) * 0.32,
-                opacity: Math.random() * 0.45 + 0.18
+                x: Math.random() * 800,
+                y: Math.random() * 600,
+                r: Math.random() * 2.0 + 0.5,
+                dx: (Math.random() - 0.5) * 0.28,
+                dy: (Math.random() - 0.5) * 0.28,
+                opacity: Math.random() * 0.42 + 0.15
             });
         }
 
@@ -384,7 +381,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const dist = Math.hypot(p.x - mx, p.y - my);
                 if (dist < 90) {
                     const angle = Math.atan2(p.y - my, p.x - mx);
-                    const force = (90 - dist) / 90 * 0.55;
+                    const force = (90 - dist) / 90 * 0.5;
                     p.x += Math.cos(angle) * force;
                     p.y += Math.sin(angle) * force;
                 }
@@ -397,21 +394,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 p.x += p.dx;
                 p.y += p.dy;
-                if (p.x < 0 || p.x > canvas.width)  p.dx *= -1;
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
             });
             ctx.globalAlpha = 1;
             animFrame = requestAnimationFrame(drawParticles);
         }
 
-        drawParticles();
-
-        // Pause when hero not visible (performance)
+        // Only run when hero is visible
         const heroObs = new IntersectionObserver(entries => {
             if (!entries[0].isIntersecting) {
                 cancelAnimationFrame(animFrame);
             } else {
-                drawParticles();
+                animFrame = requestAnimationFrame(drawParticles);
             }
         }, { threshold: 0 });
         heroObs.observe(hero);
@@ -518,9 +513,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===================================
     // Glass Card 3D Tilt (desktop only)
+    // PERF FIX: Skip on touch/mobile
     // ===================================
-    const isTouchDevice = window.matchMedia('(hover: none)').matches;
-    if (!isTouchDevice) {
+    if (!isTouchDevice && !isMobileViewport()) {
         document.querySelectorAll('.glass-card, .highlight-item').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
@@ -541,11 +536,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (aboutIntro && !document.querySelector('.stat-counter')) {
         const statHtml = `
             <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.85rem 0;max-width:100%;overflow:hidden;">
-                <span class="stat-counter"><span class="count-num" data-target="3">0</span>+ yrs experience</span>
-                <span class="stat-counter"><span class="count-num" data-target="50">0</span>+ incidents/week</span>
-                <span class="stat-counter"><span class="count-num" data-target="2">0</span> internships</span>
+                <span class="stat-counter"><span class="count-num" data-target="3">0</span><span class="stat-label" data-en="+ yrs experience" data-ar="+ سنوات خبرة">+ yrs experience</span></span>
+                <span class="stat-counter"><span class="count-num" data-target="50">0</span><span class="stat-label" data-en="+ incidents/week" data-ar="+ حادثة أسبوعياً">+ incidents/week</span></span>
+                <span class="stat-counter"><span class="count-num" data-target="2">0</span><span class="stat-label" data-en=" internships" data-ar=" تدريب"> internships</span></span>
             </div>`;
         aboutIntro.insertAdjacentHTML('afterend', statHtml);
+
+        // Apply current language to newly injected stat labels
+        if (currentLang === 'ar') {
+            document.querySelectorAll('.stat-label[data-ar]').forEach(el => {
+                el.textContent = el.getAttribute('data-ar');
+            });
+        }
 
         const counterObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -571,38 +573,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===================================
     // Cursor Glow (desktop only)
+    // PERF FIX: Not created on touch/mobile
     // ===================================
-    const cursorGlow = document.createElement('div');
-    cursorGlow.className = 'cursor-glow';
-    cursorGlow.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(cursorGlow);
+    if (!isTouchDevice) {
+        const cursorGlow = document.createElement('div');
+        cursorGlow.className = 'cursor-glow';
+        cursorGlow.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(cursorGlow);
 
-    let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+        let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
 
-    document.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursorGlow.classList.add('visible');
-    });
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorGlow.classList.add('visible');
+        });
 
-    document.addEventListener('mouseleave', () => cursorGlow.classList.remove('visible'));
+        document.addEventListener('mouseleave', () => cursorGlow.classList.remove('visible'));
 
-    const interactiveEls = 'a, button, .skill-tag, .contact-card, .glass-card, .btn';
-    document.addEventListener('mouseover', e => {
-        if (e.target.closest(interactiveEls)) cursorGlow.classList.add('expanded');
-    });
-    document.addEventListener('mouseout', e => {
-        if (e.target.closest(interactiveEls)) cursorGlow.classList.remove('expanded');
-    });
+        const interactiveEls = 'a, button, .skill-tag, .contact-card, .glass-card, .btn';
+        document.addEventListener('mouseover', e => {
+            if (e.target.closest(interactiveEls)) cursorGlow.classList.add('expanded');
+        });
+        document.addEventListener('mouseout', e => {
+            if (e.target.closest(interactiveEls)) cursorGlow.classList.remove('expanded');
+        });
 
-    function animateGlow() {
-        glowX += (mouseX - glowX) * 0.11;
-        glowY += (mouseY - glowY) * 0.11;
-        cursorGlow.style.left = glowX + 'px';
-        cursorGlow.style.top  = glowY + 'px';
-        requestAnimationFrame(animateGlow);
+        let glowFrame;
+        function animateGlow() {
+            glowX += (mouseX - glowX) * 0.11;
+            glowY += (mouseY - glowY) * 0.11;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            glowFrame = requestAnimationFrame(animateGlow);
+        }
+        animateGlow();
     }
-    animateGlow();
 
     // ===================================
     // Magnetic Buttons (desktop only)
@@ -622,13 +628,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ===================================
-    // Particle Mouse Repel — expose coords
+    // Particle Mouse Repel — expose coords (desktop only)
     // ===================================
-    window._portfolioMouse = { x: -9999, y: -9999 };
-    document.addEventListener('mousemove', e => {
-        window._portfolioMouse.x = e.clientX;
-        window._portfolioMouse.y = e.clientY;
-    });
+    if (!isTouchDevice) {
+        window._portfolioMouse = { x: -9999, y: -9999 };
+        document.addEventListener('mousemove', e => {
+            window._portfolioMouse.x = e.clientX;
+            window._portfolioMouse.y = e.clientY;
+        });
+    }
 
     // ===================================
     // Keyboard Navigation
@@ -691,6 +699,14 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('%c👋 Hello, fellow developer!', 'font-size:20px;font-weight:bold;color:#8b7355;');
     console.log('%cCurious about the code? Check the repo or reach out.', 'font-size:13px;color:#6b6b6b;');
 
+    // ===================================
+    // Hero entrance shimmer (enhanced)
+    // ===================================
+    const heroName = document.querySelector('.hero-name');
+    if (heroName && !prefersReducedMotion) {
+        setTimeout(() => heroName.classList.add('shimmer-active'), 900);
+    }
+
 });
 
 // ===================================
@@ -704,10 +720,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-// ===================================
-// Hero Name Padding - Arabic/English Adjustment
-// Now handled purely via CSS (body.rtl .hero-name)
-// ===================================
 
 // ===================================
 // Prevent default on empty hash links

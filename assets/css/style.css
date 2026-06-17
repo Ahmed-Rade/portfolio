@@ -1668,3 +1668,197 @@ body.dark-mode .cursor-glow {
     }
     html { scroll-behavior: auto; }
 }
+
+/* ===================================
+   v2 Enhancements & Mobile Perf Fixes
+   =================================== */
+
+/* PERF FIX: Disable backdrop-filter on mobile (GPU killer) */
+@media (max-width: 768px) {
+    .nav {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: var(--color-bg-primary) !important;
+        border-bottom: 1px solid var(--color-glass-border);
+    }
+
+    .glass-card,
+    .highlight-item,
+    .contact-card,
+    .resume-box {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    /* PERF FIX: Reduce will-change on mobile (memory pressure) */
+    .glass-card,
+    .highlight-item,
+    .contact-card {
+        will-change: auto;
+        transform-style: flat;
+    }
+
+    /* PERF FIX: Simplify hero background on mobile */
+    .hero {
+        background: linear-gradient(160deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+        will-change: auto;
+    }
+
+    /* PERF FIX: Disable body grain texture on mobile */
+    body {
+        background-image: none;
+    }
+
+    /* PERF FIX: Disable hero decoration pulse on mobile */
+    .hero-decoration {
+        animation: none;
+        opacity: 0.4;
+    }
+    .hero-decoration::after {
+        animation: none;
+    }
+
+    /* PERF FIX: Reduce contact grid to 2-col on mid-size mobile */
+    .contact-methods-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-methods-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* PERF FIX: Disable markerPulse animation on mobile */
+@media (max-width: 768px) {
+    .timeline-marker-ring {
+        animation: none;
+        opacity: 0;
+    }
+}
+
+/* ===================================
+   Aesthetic Enhancements
+   =================================== */
+
+/* Hero name shimmer animation */
+@keyframes shimmerPass {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.hero-name.shimmer-active {
+    background: linear-gradient(
+        135deg,
+        var(--color-text-primary) 30%,
+        var(--color-accent-light) 50%,
+        var(--color-accent) 60%,
+        var(--color-text-primary) 75%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerPass 2.8s ease forwards;
+}
+
+/* Enhanced skill tag hover glow */
+.skill-tag:hover {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    color: #fff;
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 6px 18px var(--color-accent-glow);
+    border-color: var(--color-accent);
+}
+
+/* Section separator — more visible */
+.section + .section::before {
+    opacity: 0.5;
+    width: 120px;
+}
+
+/* Contact card — accent left border on hover */
+.contact-card {
+    border-left: 3px solid transparent;
+    transition: all var(--transition-medium), border-left-color var(--transition-fast);
+}
+.contact-card:hover {
+    border-left-color: var(--color-accent);
+}
+
+/* Timeline content — subtle inner glow on hover */
+.timeline-content.glass-card:hover {
+    box-shadow: 0 16px 48px var(--color-shadow-md),
+                inset 0 0 0 1px var(--color-accent-glow),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Footer logo text */
+.footer-copyright strong {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+}
+
+/* Nav active link — smoother indicator */
+.nav-menu li a.active {
+    background: var(--color-accent-glow);
+    border-radius: var(--radius-sm);
+}
+
+/* Highlight item icons — subtle spin on hover */
+.highlight-item:hover i {
+    transform: rotate(8deg) scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Resume box — enhanced gradient border */
+.resume-box {
+    position: relative;
+}
+.resume-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    padding: 1.5px;
+    background: linear-gradient(135deg, var(--color-accent-light), transparent, var(--color-accent));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Scroll indicator — fade out on scroll */
+.scroll-indicator {
+    transition: opacity 0.4s ease;
+}
+
+/* Section titles — improved eyebrow */
+.section-title::before {
+    width: 40px;
+    opacity: 0.7;
+    background: linear-gradient(90deg, var(--color-accent-light), var(--color-accent));
+}
+
+/* Dark mode nav — keep some blur on desktop */
+@media (min-width: 769px) {
+    body.dark-mode .nav {
+        background: rgba(22, 20, 15, 0.92);
+    }
+}
+
+/* Touch active state for cards (mobile tap feedback) */
+@media (hover: none) {
+    .contact-card:active {
+        transform: scale(0.98);
+        border-color: var(--color-accent);
+    }
+    .skill-tag:active {
+        background: var(--color-accent);
+        color: #fff;
+        transform: scale(0.96);
+    }
+}

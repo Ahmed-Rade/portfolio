@@ -1,67 +1,90 @@
-# 👋 Welcome to My GitHub Portfolio
+# 👋 Ahmed Rade — Portfolio
 
-Hi, I’m **Ahmed** — a **Computer Engineering graduate** with a strong focus on **IT systems, programming, and practical problem-solving**.  
-This GitHub serves as my **professional portfolio**, where I showcase projects, experiments, and learning related to **IT, software, and automation**.
+Hi, I'm **Ahmed** — a **Computer Engineer** specializing in **IT operations, NOC monitoring, and web development** with hands-on experience in fast-paced enterprise environments.
 
 ---
 
 ## 🎯 About Me
 
-- Bachelor of Computer Engineering — **Ajman University (2019–2023)**
-- Strong background in **IT fundamentals, programming, and networking basics**
-- Hands-on experience with **Linux, Windows Server, Git, and VS Code**
-- Software-focused, with a genuine passion for **hardware and systems**
-- Known for **high problem-solving ability**, attention to detail, and teamwork
+- **Bachelor of Computer Engineering** — Ajman University (2019–2023)
+- **IT Service Desk & NOC Analyst** at CNS Dubai (Sep 2023 – Present)
+- Daily Linux user with a homelab mindset — always building, scripting, automating
+- Passionate about IT infrastructure, open-source tools, and practical problem-solving
+
+---
+
+## 💼 Professional Experience
+
+| Role | Company | Period |
+|------|---------|--------|
+| IT Service Desk Analyst / NOC | CNS, Dubai, UAE | Sep 2023 – Present |
+| Helpdesk Intern | Casper Computer, Ajman | Mar 2023 – Sep 2023 |
+| Web Development Intern | Analytica FZE, Dubai | Sep 2022 – Mar 2023 |
+
+### CNS Dubai — IT Service Desk & NOC Analyst
+- Monitor network infrastructure using **OpManager** and **Site24x7**
+- Handle incident management and resolution via **BMC Remedy** ticketing
+- Manage user accounts, permissions, and escalations across enterprise clients
+- Coordinate Knowledge Transfer plans and shift scheduling for NOC team
 
 ---
 
 ## 💻 Technical Skills
 
-### Programming & Scripting
-- **C, C++**
-- **Python**
-- **MATLAB**
-- **HTML, CSS, JavaScript**
+### IT & Operations
+- IT Support & Troubleshooting
+- NOC Monitoring (OpManager, Site24x7)
+- Ticketing Systems (BMC Remedy)
+- Windows Server, Active Directory, Microsoft 365
 
-### IT & Systems
-- Linux (daily use)
-- Windows Server fundamentals
-- Networking fundamentals (TCP/IP, Packet Tracer)
-- System troubleshooting & logical diagnostics
+### Networking
+- TCP/IP, DNS, DHCP
+- Networking Fundamentals (CCNA in progress)
+- Cisco Packet Tracer
+
+### Operating Systems
+- **Linux** — daily use (Zorin OS, Linux Mint, Fedora)
+- Windows 10/11 (Enterprise & consumer)
+
+### Programming & Scripting
+- **Python** — automation scripts, CLI tools
+- **HTML, CSS, JavaScript** — responsive web projects
+- **PHP, SQL** — back-end fundamentals
+- **C, C++, MATLAB** — academic foundation
 
 ### Tools & Platforms
 - Git & GitHub
-- Visual Studio Code
-- MATLAB
-- Multisim
-- Cisco Packet Tracer
+- VS Code
+- Multisim, Cisco Packet Tracer
 
 ---
 
-## 📂 What You’ll Find Here
+## 📂 Projects
 
-- IT-related projects and configurations  
-- Programming practice and automation scripts  
-- Web and software fundamentals  
-- Experiments, labs, and learning notes  
-- Ongoing improvements as I grow professionally  
-
-This repository will **evolve over time** as I add better projects and refine existing ones.
+- **Portfolio Website** — Bilingual (AR/EN), dark mode, animated UI — vanilla HTML/CSS/JS
+- **NOC Command Center Dashboard** — Browser-based, Pomodoro timer, hacker aesthetic
+- **GTA San Andreas Cheat Reference** — Static page deployed on GitHub Pages
+- **Arabic Dental Clinic Site** — RTL-first, animated, responsive, dark/light theme
+- **Python Media Downloader** — yt-dlp + gallery-dl, parallel threading, batch mode
+- **Shift Scheduler & Comp-Off Tracker** — Flask + SQLite web app for NOC team
 
 ---
 
 ## 🚀 Goals
 
-- Build real-world, practical IT and software projects  
-- Improve automation and system efficiency skills  
-- Grow professionally in **IT Support, NOC, and Systems roles**  
-- Maintain clean, well-documented, and structured repositories  
+- Earn **CCNA**, **CompTIA A+/Network+**, and **ITIL** certifications
+- Deepen NOC automation and monitoring scripting
+- Build practical, well-documented open-source tools
+- Grow toward **Systems Engineer** and **DevOps** roles
 
 ---
 
-## 📫 Get in Touch
+## 📫 Contact
 
-- GitHub: [Ahmed-Rade](https://github.com/Ahmed-Rade)
+- 🌐 Portfolio: [ahmed-rade.github.io](https://ahmed-rade.github.io)
+- 💼 LinkedIn: [ahmed-rade](https://www.linkedin.com/in/ahmed-rade-aab7a3298/)
+- 🐙 GitHub: [Ahmed-Rade](https://github.com/Ahmed-Rade)
+- 📧 Email: ahmadrade2023@gmail.com
 
 ---
 
